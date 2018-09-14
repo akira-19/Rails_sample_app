@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
 	def setup
-		@user = User.new(name: "Example User", email: "user@exapmle.com",
+		@user = User.new(name: "Example User", email: "user@exapmle.com", id_name: "example_user", #id_nameの追加
 										password: "foobar", password_confirmation: "foobar")
 	end
 
@@ -13,6 +13,11 @@ class UserTest < ActiveSupport::TestCase
 
 	test "name should be present" do
 		@user.name = "  "
+		assert_not @user.valid?
+	end
+
+	test "id_name should be present" do
+		@user.id_name = "  "
 		assert_not @user.valid?
 	end
 
@@ -26,10 +31,16 @@ class UserTest < ActiveSupport::TestCase
 	 assert_not @user.valid?
  end
 
+	test "id_name should not be including blank" do
+	 @user.id_name = "aaa aa"
+	 assert_not @user.valid?
+ 	end
+
  test "email should not be too long" do
 	 @user.email = "a" * 244 + "@example.com"
 	 assert_not @user.valid?
  end
+
 
  test "email validation should accept valid addresses" do
      valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
@@ -38,6 +49,20 @@ class UserTest < ActiveSupport::TestCase
        @user.email = valid_address
        assert @user.valid?, "#{valid_address.inspect} should be valid"
      end
+   end
+
+	 test "name should be unique" do
+    duplicate_user = @user.dup
+ 		duplicate_user.name = @user.name.upcase
+		@user.save
+    assert_not duplicate_user.valid?
+   end
+
+	 test "id_name should be unique" do
+    duplicate_user = @user.dup
+ 		duplicate_user.id_name = @user.id_name.upcase
+		@user.save
+    assert_not duplicate_user.valid?
    end
 
 	test "email addresses should be unique" do

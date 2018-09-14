@@ -47,4 +47,15 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
      assert_match "1 micropost", response.body
   end
 
+	test "microposts show the reply to a user" do
+		other_user = users(:lana)
+		log_in_as(users(:archer))
+		get root_path
+		post microposts_path, params: { micropost: { content: "@#{other_user.id_name} testtest" } }
+
+		log_in_as(other_user)
+		get root_path
+		assert_match "@#{other_user.id_name} testtest", response.body
+	end
+
 end

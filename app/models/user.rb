@@ -11,7 +11,11 @@ class User < ApplicationRecord
 	attr_accessor :remember_token, :activation_token, :reset_token
 	before_save   :downcase_email
   before_create :create_activation_digest
-	validates :name,  presence: true, length: { maximum: 50 }
+	validates :name,  presence: true, length: { maximum: 50 }, uniqueness: {case_sensitive: false}
+	VALID_ID_NAME_REGEX = /\A[\w+\-.]+\z/i
+	validates :id_name, presence: true, length: { maximum: 50 },
+									format: { with: VALID_ID_NAME_REGEX},
+									uniqueness: {case_sensitive: false}
  	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
 									format: { with: VALID_EMAIL_REGEX },
@@ -74,13 +78,13 @@ class User < ApplicationRecord
 		reset_sent_at < 2.hours.ago
 	end
 
-	# 試作feedの定義
-	# 完全な実装は次章の「ユーザーをフォローする」を参照
+	# feedの定義
 	def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
-                     OR user_id = :user_id", user_id: id)
+                     OR user_id = :user_id OR in_reply_to = :in_reply_to", user_id: self.id, in_reply_to: self.id)
+
 	end
 
 	# ユーザーをフォローする

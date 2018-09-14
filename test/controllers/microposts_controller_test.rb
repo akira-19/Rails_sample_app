@@ -19,6 +19,16 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+	test "a user can't reply to themselves" do
+		user = users(:michael)
+		log_in_as(user)
+		assert_no_difference 'Micropost.count' do
+			post microposts_path, params: { micropost: { content: "@#{user.id_name} hello" } }
+		end
+	end
+
+
+
 	test "should redirect destroy for wrong micropost" do
 		log_in_as(users(:michael))
 		micropost = microposts(:ants)

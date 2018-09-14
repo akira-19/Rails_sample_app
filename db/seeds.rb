@@ -4,6 +4,7 @@ User.create!(name:  "Example User",
              password:              "foobar",
              password_confirmation: "foobar",
              admin:     true,
+						 id_name: "Example_user",
              activated: true,
              activated_at: Time.zone.now)
 
@@ -11,8 +12,10 @@ User.create!(name:  "Example User",
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
+	id_name = "example-#{n+1}"
   User.create!(name:  name,
                email: email,
+							 id_name: id_name,
                password:              password,
                password_confirmation: password,
                activated: true,
