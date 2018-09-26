@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>test</title>
+		<style type="text/css">
+		.msg_container{
+			width: 500px;
+			height: 500px;
+			margin: auto;
+			background: rgb(223, 223, 223)
+		}
+
+		.my_msg{
+			background: skyblue;
+			position: relative;
+		}
+
+		.my_msg_msg{
+			font-size: 1.2em;
+			background: white;
+			display: inline-block;
+			max-width: 300px;
+			padding: 5px;
+			border-radius: 10px;
+			position: absolute;
+			right: 5px;
+			word-wrap: break-word;
+		}
+
+		.my_msg_time{
+			display: inline-block;
+			position: absolute;
+			bottom: 2px;
+			margin-right: 10px;
+
+		}
+		</style>
+	</head>
+	<body>
+		<div class="msg_container">
+			<div class="my_msg">
+				<div class="my_msg_time">
+					10:25
+				</div>
+				<div class="my_msg_msg">
+					ptest contenttetewt
+					ewtwtegewgewg
+					eegegewewgegegeggweg
+				</div>
+				<br>
+				<div class="my_msg">
+					<div class="my_msg_time">
+						10:28
+					</div>
+					<div class="my_msg_msg">
+						ptest contenttetewt
+					</div>
+
+		</div>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript">
+		$(function() {
+
+			//console.log(my_msg_w);
+			$(".my_msg_msg").load(function(){
+				var my_msg_h = $(this).height();
+
+				$(this).css('background', 'red');
+				//console.log($(this).height());
+				$(this).height(my_msg_h+10);
+				//console.log($(this).height());
+				//console.log(my_msg_h);
+			});
+
+			$(".my_msg_time").load(function(){
+				var my_msg_w = $(this).width();
+				$(this).css('right', my_msg_w+10);
+			});
+
+		});
+
+
+		</script>
+	</body>
+</html>

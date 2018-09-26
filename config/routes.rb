@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'rooms/new'
+
+  get 'rooms/create'
+
+  get 'rooms/index'
+
+  get 'rooms/show'
+
+  get 'messages/Messages'
+
+  get 'messages/new'
+
+  get 'messages/create'
+
   get 'password_resets/new'
 
   get 'password_resets/edit'
@@ -20,5 +34,10 @@ Rails.application.routes.draw do
 	resources :password_resets, only: [:new, :create, :edit, :update]
 	resources :microposts,          only: [:create, :destroy]
 	resources :relationships,       only: [:create, :destroy]
+	resources :messages, only: [:new, :create]
+	resources :rooms, only: [:new, :create, :index, :show]
+
+
+
 
 end

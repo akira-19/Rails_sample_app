@@ -1,0 +1,2 @@
+class AddRoomIdToMessage < ApplicationRecord
+end

@@ -14,4 +14,10 @@ class UserMailerPreview < ActionMailer::Preview
     user.reset_token = User.new_token
     UserMailer.password_reset(user)
 	end
+
+	def get_followed
+		following_user = User.first
+		followed_user = User.third
+		UserMailer.get_followed(following_user, followed_user)
+	end
 end

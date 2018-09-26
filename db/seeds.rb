@@ -8,6 +8,14 @@ User.create!(name:  "Example User",
              activated: true,
              activated_at: Time.zone.now)
 
+User.create!(name:  "Test User",
+             email: "test@railstutorial.org",
+             password:              "foobar",
+             password_confirmation: "foobar",
+						 id_name: "test_user",
+             activated: true,
+             activated_at: Time.zone.now)
+
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
@@ -36,3 +44,6 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# room
+Room.create!(user1: users.first.id, user2: users.second.id)

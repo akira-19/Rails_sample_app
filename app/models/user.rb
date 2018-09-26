@@ -8,6 +8,17 @@ class User < ApplicationRecord
 	                                 dependent:   :destroy
 	has_many :following, through: :active_relationships, source: :followed
 	has_many :followers, through: :passive_relationships, source: :follower
+
+	has_many :send_messages, class_name: "Message",
+												foreign_key: "sender_id",
+												dependent: :destroy
+	has_many :receive_messages, class_name: "Message",
+												foreign_key: "receiver_id",
+												dependent: :destroy
+	has_many :send_to, through: :send_messages, source: :receiver
+	has_many :receive_from, through: :receive_messages, source: :sender
+
+
 	attr_accessor :remember_token, :activation_token, :reset_token
 	before_save   :downcase_email
   before_create :create_activation_digest
@@ -84,7 +95,6 @@ class User < ApplicationRecord
                      WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
                      OR user_id = :user_id OR in_reply_to = :in_reply_to", user_id: self.id, in_reply_to: self.id)
-
 	end
 
 	# ユーザーをフォローする
@@ -100,6 +110,10 @@ class User < ApplicationRecord
 	# 現在のユーザーがフォローしてたらtrueを返す
 	def following?(other_user)
 		following.include?(other_user)
+	end
+
+	def user_followed(followed_user)
+		UserMailer.get_followed(self, followed_user).deliver_now
 	end
 
 	private

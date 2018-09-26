@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sender: 1
+  receiver: 2
+  content: "MyString"
+  room_id: 1
+
+two:
+  sender: 2
+  receiver: 1
+  content: "MyString"
+  room_id: 1
+
+three:
+  sender: 2
+  receiver: 1
+  content: "MyString"
+  room_id: 1

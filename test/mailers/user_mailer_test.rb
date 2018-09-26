@@ -14,4 +14,15 @@ class UserMailerTest < ActionMailer::TestCase
 		assert_match CGI.escape(user.email),  mail.body.encoded
 	end
 
+	test "a user follows another user" do
+		@user1 = users(:archer)
+		@user2 = users(:lana)
+		@user1.user_followed(@user2)
+		mail = UserMailer.get_followed(@user1, @user2)
+		assert_equal "You got followed", mail.subject
+		assert_equal [@user2.email], mail.to
+		assert_equal ["noreply@example.com"], mail.from
+	end
+
+
 end

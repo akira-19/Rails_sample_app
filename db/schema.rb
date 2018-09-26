@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910215806) do
+ActiveRecord::Schema.define(version: 20180925213426) do
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "room_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"
@@ -34,6 +46,14 @@ ActiveRecord::Schema.define(version: 20180910215806) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.integer "user1", null: false
+    t.integer "user2", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user1", "user2"], name: "index_rooms_on_user1_and_user2", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -48,6 +68,7 @@ ActiveRecord::Schema.define(version: 20180910215806) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.string "id_name"
+    t.integer "followed_mail", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["id_name"], name: "index_users_on_id_name", unique: true
   end

@@ -1,0 +1,17 @@
+<% provide(:title, current_user.name) %>
+<div class="row">
+  <div class="col-md-8">
+		<h3>Message rooms</h3>
+    <% if @rooms.any? %>
+			<table class="room">
+				<%= render @rooms %>
+			</table>
+    <% end %>
+
+		<%= form_for(@room) do |f| %>
+		  <%= render 'shared/error_messages', object: f.object %>
+		  <%= f.text_field :user2, class: 'user2' %>
+			<%= f.submit "Create room", class: "btn btn-primary" %>
+		<% end %>
+  </div>
+</div>

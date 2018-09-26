@@ -1,0 +1,44 @@
+<% if message.sender_id == current_user.id %>
+	<div class="my_msg" id="my_msg_<%=message.id%>">
+		<div class="my_msg_time" id="my_msg_time_<%=message.id%>">
+			<%= message.created_at.strftime("%H:%M") %>
+		</div>
+		<div class="my_msg_msg" id="my_msg_msg_<%=message.id%>">
+			<%= message.content %>
+		</div>
+	</div>
+<% else %>
+<div class="partner_msg" id="partner_msg_<%=message.id%>">
+	<div class="partner_img" id="partner_img_<%=message.id%>">
+		<%= gravatar_for(@partner, size: 30) %>
+	</div>
+	<div class="partner_msg_msg" id="partner_msg_msg_<%=message.id%>">
+		<%= message.content %>
+	</div>
+	<div class="partner_msg_time" id="partner_msg_time_<%=message.id%>">
+		<%= message.created_at.strftime("%H:%M") %>
+	</div>
+
+</div>
+<% end %>
+
+<script type="text/javascript">
+	$(function() {
+		var my_msg_msg_h = $("#my_msg_msg_<%=message.id%>").height();
+		var my_msg_msg_w = $("#my_msg_msg_<%=message.id%>").width();
+		var partner_msg_msg_h = $("#partner_msg_msg_<%=message.id%>").height();
+		var partner_msg_msg_w = $("#partner_msg_msg_<%=message.id%>").width();
+
+
+
+		$("#my_msg_<%=message.id%>").height(my_msg_msg_h+10);
+		$("#my_msg_time_<%=message.id%>").css('right', my_msg_msg_w+10);
+
+		$("#partner_msg_<%=message.id%>").height(partner_msg_msg_h+10);
+		$("#partner_msg_time_<%=message.id%>").css('left', partner_msg_msg_w+50);
+
+	});
+
+
+
+</script>
