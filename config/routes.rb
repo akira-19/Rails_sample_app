@@ -29,6 +29,10 @@ Rails.application.routes.draw do
 		member do
 			get :following, :followers
 		end
+
+		collection do
+			get :search
+		end
 	end
 	resources :account_activations, only: [:edit]
 	resources :password_resets, only: [:new, :create, :edit, :update]
@@ -36,6 +40,7 @@ Rails.application.routes.draw do
 	resources :relationships,       only: [:create, :destroy]
 	resources :messages, only: [:new, :create]
 	resources :rooms, only: [:new, :create, :index, :show]
+
 
 
 

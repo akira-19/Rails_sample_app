@@ -116,6 +116,14 @@ class User < ApplicationRecord
 		UserMailer.get_followed(self, followed_user).deliver_now
 	end
 
+	def self.search(query)
+		rel = order(:id)
+		if query.present?
+			rel = rel.where("name LIKE ? OR id_name LIKE?", "%#{query}%", "%#{query}%")
+		end
+		return rel
+	end
+
 	private
 
     # メールアドレスをすべて小文字にする

@@ -64,6 +64,12 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+	def search
+		@users = User.search(params[:q]).paginate(page: params[:page])
+		render "index"
+	end
+
+
 
 	private
 

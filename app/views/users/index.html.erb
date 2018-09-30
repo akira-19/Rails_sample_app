@@ -1,10 +1,18 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 
-<%= will_paginate %>
+
+
+<%= form_with url: search_users_path, method: :get, local: true do |f| %>
+<%= f.text_field :q %>
+<%= f.submit :submit, class: "btn btn-primary" %>
+<% end %>
+
+<%= will_paginate @users %>
+
 
 <ul class="users">
   <%= render @users %>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate @users %>
