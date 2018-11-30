@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# repository
+Sample app from rails tutorial with some extensions,
+such as reply function, direct message
 
-Things you may want to cover:
+# Dependency
+Ruby version 2.5.1
 
-* Ruby version
+# Usage
+See Rails Tutorial
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# References
+Rails Tutorial https://www.railstutorial.org/
