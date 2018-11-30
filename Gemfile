@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails',        '5.1.5'
 gem 'bcrypt',         '3.1.11'
-gem 'slim-rails'	
+gem 'slim-rails'
 gem 'faker',          '1.7.3'
 gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '4.7.0'
@@ -27,6 +27,7 @@ group :development do
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
+	gem 'rails-erd'
 end
 
 group :test do
