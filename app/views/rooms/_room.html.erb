@@ -8,18 +8,17 @@
 
 	<td>
 		<%= link_to(room) do %>
-		<%# link_to gravatar_for(partner, size: 50), room %>
 		<%= gravatar_for(partner, size: 50) %>
 		 <span class="user_name_in_room"><%= partner.name %></span>
 		 <span class="msg_time">
-
-			<%# if false %>
-				<% if (room.messages.last.created_at.day == Date.today) %>
-					<%=  room.messages.last.created_at.strftime("%I:%M %p") %>
-				<%  else %>
-					<%= room.messages.last.created_at.strftime("%y-%m-%d") %>
+				<% if room.messages.present? %>
+					<% if (room.messages.last.created_at.day == Date.today) %>
+						<%=  room.messages.last.created_at.strftime("%I:%M %p") %>
+					<%  else %>
+						<%= room.messages.last.created_at.strftime("%y-%m-%d") %>
+					<% end %>
 				<% end %>
-			<%# end %>
+
 		</span>
 		<br>
 		<span class="room_content">

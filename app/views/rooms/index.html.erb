@@ -10,7 +10,7 @@
 
 		<%= form_for(@room) do |f| %>
 		  <%= render 'shared/error_messages', object: f.object %>
-		  <%= f.text_field :user2, class: 'user2' %>
+		  <%= f.text_field :user2, class: 'user2',placeholder: "input user id you want to make a room with" %>
 			<%= f.submit "Create room", class: "btn btn-primary" %>
 		<% end %>
   </div>

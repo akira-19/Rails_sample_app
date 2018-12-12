@@ -39,7 +39,7 @@ before_action :correct_user,   only: :destroy
 		def get_in_reply_to
 			content = @micropost.content
 			reply_user_name = ""
-			if content && content[0] == "@" #contentがnilの時用
+			if content && (content[0] == "@") #when content is not nil
 				i = 1
 				while content[i] != " "
 					reply_user_name += content[i]

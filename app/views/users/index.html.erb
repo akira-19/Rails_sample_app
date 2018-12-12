@@ -4,8 +4,8 @@
 
 
 <%= form_with url: search_users_path, method: :get, local: true do |f| %>
-<%= f.text_field :q %>
-<%= f.submit :submit, class: "btn btn-primary" %>
+<%= f.text_field :q, placeholder: "Input user name" %>
+<%= f.submit :search, class: "btn btn-primary" %>
 <% end %>
 
 <%= will_paginate @users %>
