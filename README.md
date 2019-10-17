@@ -14,6 +14,7 @@ Search: You can search users among all users.
 
 # Dependency
 Ruby version 2.5.1
+Rails version 5.0.1
 
 # Usage
 See Rails Tutorial
